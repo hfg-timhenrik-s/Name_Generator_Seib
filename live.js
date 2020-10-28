@@ -4,7 +4,7 @@ let counterA = 0 ;
 let counterB = 0 ;
 let counterCD = 0 ;
 
-for (let j = 0; j < 5; j++){
+for (let j = 0; j < 6; j++){
     console.log("The Word " + word[j] + " contains of " + "3 " + "letters")
     
     let choosenword = word[j]
