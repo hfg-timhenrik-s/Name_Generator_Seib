@@ -15,33 +15,11 @@ person3 = [createName(), createSurname()]
 person4 = [createName(), createSurname()]
 person5 = [createName(), createSurname()]
 
-console.log(person1)
-console.log(person2)
-console.log(person3)
-console.log(person4)
-console.log(person5)
+console.log(person1 + [" "] + person2 + [" "] + person3 + [" "] + person4 + [" "] + person5)
 
-/*let Familyname
-Famliyname = checkSurname(person1)
-console.log(Familyname)*/
-
-
-
-/* 
-Speichert euch insgesamt 5 Personen und überprüft, ob jemand den gleichen Nachnamen hat.
-Wenn ja, soll ausgegen werden, dass diese beiden Personen verwandt sind.
-Wenn alle Personen miteinander verwandt sind, soll etwas besonderes ausgegeben werden.*/ 
-
-function checkSurname(givenPerson) {
-    console.log(givenPerson)
-    if(givenPerson[1] === person2[1]) { 
-    return givenPerson + " und " + person2 + " sind verwandt!"
-    } else {
-        console.log("nicht verwandt")
-        return givenPerson
-    }
-}
-
+let Familyname
+Famliyname = checkSurname(person1, person2)
+console.log(Familyname)
 
 
 //Function die zufälligen Namen sucht
@@ -60,4 +38,15 @@ function createSurname() {
 function getRandomInt(max) {
     let flex = Math.floor(Math.random() * Math.floor(max));
     return flex
+}
+
+// CheckSurname Function 
+
+function checkSurname(givenPerson, givenPerson2) {
+        console.log(givenPerson, givenPerson2)
+        if(givenPerson[1] === givenPerson2[1]) { 
+        return givenPerson + " und " + givenPerson2 + " sind verwandt!"
+    } else {
+        return givenPerson1 + " und " + givenPerson2 + "sind nicht verwandt"
+    }
 }
