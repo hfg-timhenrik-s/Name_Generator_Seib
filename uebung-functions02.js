@@ -17,7 +17,7 @@ zahlen3 = fillArray(100)
 zahl1 = zahlen1[getRandomInt(zahlen1.length)]
 zahl2 = zahlen2[getRandomInt(zahlen2.length)]
 zahl3 = zahlen3[getRandomInt(zahlen3.length)]
-console.log(zahlen1)
+
 
 // zahl größer 50?
 let checkZahl1
@@ -58,4 +58,5 @@ function checkNumber(givenNb, compNb, add) {
 
 function getRandomInt(max) {
     let flex = Math.floor(Math.random() * Math.floor(max));
+    return flex
 }
