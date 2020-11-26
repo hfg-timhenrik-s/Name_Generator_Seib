@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<body>
+  Erste Zahl:
+  <!-- bei den input-Feldern id hinzufügen -->
+  <input id="zahlEins" type="number" style="margin-right: 10px;" value="0">
+  <!-- bei jedem button onclick="" mit Funktionsaufruf hinzufügen -->
+  <button onclick="addieren()">+</button>
+  <button onclick="subtrahieren()">-</button>
+  <button onclick="mal()">*</button>
+  <button onclick="dividieren()" style="margin-right: 10px;">/</button>
+  Zweite Zahl:
+  <input id="zahlZwei" type="number" style="margin-right: 10px;" value="0">
+  <p>
+  Ergebnis:
+  <input id="output" disabled type="number" style="margin-right: 10px;" value="0">
+  </p>
+<p id="test">
+</p>
+<script>
+  // eine Funktion, die Zahl 1 und Zahl 2 addiert
+  /* Zahlen auslesen
+  document.getElementById("id").value = "irgendwas"
+  */
+  function addieren(){
+    let number1 = Number(document.getElementById("zahlEins").value)
+    let number2 = Number(document.getElementById("zahlZwei").value)
+    document.getElementById("output").value = number1 + number2
+  }
+  // eine Funktion, die Zahl 1 und Zahl 2 subtrahiert
+  function subtrahieren(){
+      let numberEins = Number(document.getElementById("zahlEins").value)
+      let numberZwei = Number(document.getElementById("zahlZwei").value)
+      document.getElementById("output").value = numberEins - numberZwei
+  }
+  // eine Funktion, die Zahl 1 und Zahl 2 multipliziert
+  function mal() {
+    let numberEins = Number(document.getElementById("zahlEins").value)
+      let numberZwei = Number(document.getElementById("zahlZwei").value)
+      document.getElementById("output").value = numberEins * numberZwei
+  }
+  // eine Funktion, die Zahl 1 und Zahl 2 dividiert
+  function dividieren() {
+    let numberEins = Number(document.getElementById("zahlEins").value)
+      let numberZwei = Number(document.getElementById("zahlZwei").value)
+      document.getElementById("output").value = numberEins / numberZwei
+  }
+</script>
+</body>
+</html>

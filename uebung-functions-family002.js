@@ -15,11 +15,7 @@ person3 = [createName(), createSurname()]
 person4 = [createName(), createSurname()]
 person5 = [createName(), createSurname()]
 
-console.log(person1)
-console.log(person2)
-console.log(person3)
-console.log(person4)
-console.log(person5)
+console.log(person1, person2, person3, person4, person5)
 
 /*let Familyname
 Famliyname = checkSurname(person1)

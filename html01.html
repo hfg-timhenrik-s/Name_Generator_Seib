@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Tim Henrik Seib</title>
+        <meta charset="utf-8"/>
+        <meta name="author" content="Tim Henrik Seib" />
+    </head>
+    <body>
+        <button onclick="clickbutton()">Click me!</button>
+
+        <p>Enter your name: <input id="yourname" type="text" value="">
+        <button onclick="sayHello()">Say hello!</button>
+        </p>
+        <p>
+        Enter your age: <input id="yourage" type="number" value="your Age">
+        <button onclick="sayAge()">Your Age in 5 years</button>
+        </p>
+        <script>
+            function clickbutton() {
+                alert("The button was clicked.")
+            }
+            function sayHello() {
+                let name = document.getElementById("yourname").value
+                alert("Hello " + name)
+            }
+            function sayAge() {
+                let name = document.getElementById("yourname").value
+                let age = Number(document.getElementById("yourage").value)
+                let x = age + 5
+                alert("Hello " + name + ", in 5 years you will be " + x + " years old!")
+            }
+        </script>
+    </body>
+</html>
