@@ -6,15 +6,23 @@ h1{
 
 
 input {
-    align: center
-    type="text" 
+    align: "center";
+    type: "text";
     font-family: 'Quicksand', sans-serif; 
     width: 130px; 
     height: 30px; 
-    text-align: center 
+    text-align: center; 
 }
 
 p {
     font-family: 'Quicksand', sans-serif;
     text-align: center;
+}
+
+td:hover {
+    background-color: #CCC5B9;
+}
+
+td:active {
+    color: yellow;
 }

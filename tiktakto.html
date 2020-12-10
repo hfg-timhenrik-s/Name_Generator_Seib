@@ -22,24 +22,26 @@
     </head>
     <body>
         <h1 class="headline">tik,tAk & toe</h1>
-        <p align="center"><input id="yournameOne" value="Name 01" > | <input id="yournameTwo" value="Name 02">
+        <p align="center"> <button onclick="confirm()"> confirm!</button> <input id="PlayerOne" value="Name 01"  > | <input id="PlayerTwo" value="Name 02">
         <p style="font-size: 20px;">  00 | 00  </p>
-        <p> It´s your turn ... (Player X) </p>
+        <p> It´s your turn ... <span id="playerTurn"></span> </p>
         <table align="center">
                 <tr> <!--1. Feld Zeile-->
-                    <td>  </td>
-                    <td>  </td>
-                    <td>  </td>
+                    <td id="ZelleEins" onclick="clickPlayer('ZelleEins')"> </td>
+                    <td id="ZelleZwei"onclick="clickPlayer('ZelleZwei')"> </td>
+                    <td id="ZelleDrei" onclick="clickPlayer('ZelleDrei')"> </td>
                 </tr>
                 <tr> <!-- 2. Feldzeile-->
-                    <td>  </td>
-                    <td>  </td>
-                    <td>  </td>
+                    <td id="ZelleVier" onclick="clickPlayer('ZelleVier')"> </td>
+                    <td id="ZelleFünf" onclick="clickPlayer('ZelleFünf')"> </td>
+                    <td id="ZelleSechs" onclick="clickPlayer('ZelleSechs')"> </td>
                 </tr>
                 <tr> <!-- 3. Feldzeile-->
-                    <td>  </td>
-                    <td>  </td>
-                    <td>  </td>
+                    <td id="ZelleSieben" onclick="clickPlayer('ZelleSieben')"> </td>
+                    <td id="ZelleAcht" onclick="clickPlayer('ZelleAcht')"> </td>
+                    <td  id="ZelleNeun"onclick="clickPlayer('ZelleNeun')"> </td>
                 </tr>
         </table>
+        <script src="tiktakto.js">        </script>
+    </body>
 </html>
