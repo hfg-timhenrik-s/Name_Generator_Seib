@@ -29,18 +29,22 @@
 
 <body>
     <h1 class="headline">tik,tAk & toe</h1>
-    <p> <input id="fieldX" value="field = x * x. choose x!"> <button onclick="sizeOfField()">confirm!</button>
+    <p> <input type="number" id="fieldX" value="3"> <button onclick="sizeOfField()">confirm!</button>
     </p>
-    <p align="center"> <input id="PlayerOne" value="Name 01"> | <input id="PlayerTwo" value="Name 02"> <button
-            onclick="confirm()"> confirm!</button>
+    <p> <input style="color: #78CDD7;" id="PlayerOne" value="Name 01"> | <input style="color: #F7CACD;" id="PlayerTwo"
+            value="Name 02"> <button onclick="confirm()"> confirm!</button>
     <p style="font-size: 20px;"> 00 | 00 </p>
     <p> It´s your turn ... <span id="playerTurn"></span> </p>
     <table align="center">
     </table>
+
     <script>
         // UI erstellen
         let size = ""
         let id = ""
+        let fieldArray = []
+
+    
         //Feld Größe entscheiden
         function sizeOfField() {
             $("tr").remove()
@@ -49,15 +53,21 @@
 
             for (let i = 0; i < size; i++) {
 
+            //create Array für jede Zeile
+            fieldArray.push([]);
+
                 id = "Zeile" + i
                 //Reihe einfügen
                 $("table").append("<tr id=" + id + "> </tr>")
 
                 for (let t = 0; t < size; t++) {
+                    //create Array für jedes Feld
+                    fieldArray[i].push("");
                     //td einfügen
-                    $("#" + id).append("<td id=Zelle" + i + t + "></td>")
+                    $("#" + id).append("<td id=Zelle" + i + t + "></td>");
+                    $("#" + "Zelle" + i + t).on("click", function () { clickPlayer("Zelle" + i + t) });
                 }
-            }
+            } console.log(fieldArray)
         }
 
         //Deklariation von Variablen
@@ -65,10 +75,33 @@
         let playerTwo = ""
         let aktuellerSpieler
 
+        //Zufällig Spieler auswählen, welcher beginnnt 
+
+        function beginner() {
+            if (getRandomInt(2) >= 1) {
+                aktuellerSpieler = playerOne
+            } else {
+                aktuellerSpieler = playerTwo
+            }
+            return aktuellerSpieler
+        }
+
         //It´s your turn Feld mit Inhalt füllen
         function confirm() {
             playerOne = document.getElementById("PlayerOne").value
             playerTwo = document.getElementById("PlayerTwo").value
+            document.getElementById("playerTurn").innerText = beginner()
+        }
+
+        //abwechselnd Spieler (Player 1 oder Player 2)
+
+        function change() {
+            if (aktuellerSpieler === playerOne) {
+                aktuellerSpieler = playerTwo
+            } else if (aktuellerSpieler === playerTwo) {
+                aktuellerSpieler = playerOne
+            }
+            document.getElementById("playerTurn").innerText = aktuellerSpieler
         }
 
         $("span#playerTurn").text(aktuellerSpieler) //ersetzt den Text-Inhalt des span
@@ -83,12 +116,52 @@
             return aktuellerSpieler
         }
 
+
+        //abwechselnd Spieler (Player 1 oder Player 2)
+
+        function change() {
+            if (aktuellerSpieler === playerOne) {
+                aktuellerSpieler = playerTwo
+            } else if (aktuellerSpieler === playerTwo) {
+                aktuellerSpieler = playerOne
+            }
+            document.getElementById("playerTurn").innerText = aktuellerSpieler
+        }
+
+        //Nur ein Zeichen Pro Feld
+
+        //Auf User Klick reagieren
+        //anklickbar machen
+
+        function clickPlayer(id) {
+            if ($("#" + id).css("background-color")=== "rgb(204, 197, 185)"){
+                $("#" + id).css("background-color", colourChange());
+                id = id.replace("Zelle", "")
+                let zeile = id[0];
+                let reihe = id[1];
+                fieldArray[zeile][reihe] = aktuellerSpieler;
+                console.log(fieldArray)
+                change()
+            }
+        }
+
+        //Bei neuem Spieler und nach klick bekommt man eine neue farbe
+
+        function colourChange() {
+            if (aktuellerSpieler === playerOne) {
+                return "#78CDD7"
+            } else if (aktuellerSpieler === playerTwo) {
+                return "#F7CACD"
+            }
+        }
+
         // Zufallszahl generieren
         function getRandomInt(max) {
             return Math.floor(Math.random() * Math.floor(max));
         }
 
     </script>
+
 </body>
 
 </html>
