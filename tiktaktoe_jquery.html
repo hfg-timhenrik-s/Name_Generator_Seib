@@ -29,22 +29,24 @@
 
 <body>
     <h1 class="headline">tik,tAk & toe</h1>
-    <p> <input type="number" id="fieldX" value="3"> <button onclick="sizeOfField()">confirm!</button>
+    <p> <input type="number" id="fieldX" value="3"> <button onclick="resetArray() + sizeOfField()">confirm!</button>
     </p>
     <p> <input style="color: #78CDD7;" id="PlayerOne" value="Name 01"> | <input style="color: #F7CACD;" id="PlayerTwo"
             value="Name 02"> <button onclick="confirm()"> confirm!</button>
-    <p style="font-size: 20px;"> 00 | 00 </p>
+    <p><span style="font-size: 20px;" id="score"> </span> | <span style="font-size: 20px;" id="scoreTwo"></span></p>
     <p> It´s your turn ... <span id="playerTurn"></span> </p>
     <table align="center">
     </table>
 
     <script>
+        let pointsname1 = 0;
+        let pointsname2 = 0;
         // UI erstellen
         let size = ""
         let id = ""
         let fieldArray = []
 
-    
+
         //Feld Größe entscheiden
         function sizeOfField() {
             $("tr").remove()
@@ -53,8 +55,8 @@
 
             for (let i = 0; i < size; i++) {
 
-            //create Array für jede Zeile
-            fieldArray.push([]);
+                //create Array für jede Zeile
+                fieldArray.push([]);
 
                 id = "Zeile" + i
                 //Reihe einfügen
@@ -121,7 +123,7 @@
         //Nur ein Zeichen Pro Feld
 
         function clickPlayer(id) {
-            if ($("#" + id).css("background-color")=== "rgb(204, 197, 185)"){
+            if ($("#" + id).css("background-color") === "rgb(204, 197, 185)") {
                 $("#" + id).css("background-color", colourChange());
                 // Angeklickte Zelle mit player füllen
                 id = id.replace("Zelle", "")
@@ -153,31 +155,145 @@
             let horizontal = "";
             let vertikal = "";
             // Gewinnbedingung 
-            let victoryOne = "playerOne".repeat(pointsToWin)
-            let victoryTwo = "playerTwo".repeat(pointsToWin)
+            let victoryOne = playerOne.repeat(pointsToWin)
+            let victoryTwo = playerTwo.repeat(pointsToWin)
             // vertikal und horizontal Linien testen
-            for( let i = 0; i < fieldX ; i++) {
-                horizontal="";
-                vertikal="";
+            for (let i = 0; i < fieldX; i++) {
+                horizontal = "";
+                vertikal = "";
                 //Jedes Feld in der Linie testen
-                for( let t = 0; t < fieldX; t++) {
-                // Inhalt der Felder in string einsetzen
+                for (let t = 0; t < fieldX; t++) {
+                    // Inhalt der Felder in string einsetzen
 
-                horizontal += fieldArray [i][t]
-                vertikal += fieldArray[i][t]
-                } // die erstellten Strings auf die Gewinnbedingung kontrollieren
-                if (horizontal.includes(victoryOne)) alert(playerOne + " won");
-                else if (horizontal.includes(victoryTwo)) alert(playerTwo + " won")
+                    horizontal += fieldArray[i][t]
+                    vertikal += fieldArray[t][i]
+                }
+                // die erstellten Strings auf die Gewinnbedingung kontrollieren
+                if (horizontal.includes(victoryOne)) {
+                    alert(playerOne + " won")
+                    pointsname1++
+                    score()
+                    resetArray();
+                    sizeOfField();
+                }
+                else if (horizontal.includes(victoryTwo)) {
+                    alert(playerTwo + " won")
+                    pointsname2++
+                    score()
+                    resetArray();
+                    sizeOfField();
+                }
+                if (vertikal.includes(victoryOne)) {
+                    alert(playerOne + " won");
+                    pointsname1++
+                    score()
+                    resetArray();
+                    sizeOfField();
+                }
+                else if (vertikal.includes(victoryTwo)) {
+                    alert(playerTwo + " won")
+                    pointsname2++
+                    score()
+                    resetArray();
+                    sizeOfField();
+                }
+            }
+            
+            // diagonale Felder checken
+            let diagonal = ""; //links oben nach rechts unten
+            let diagonalZwei = ""; //links unten nach recht oben
 
-                if (vertikal.includes(victoryOne)) alert(playerOne + " won");
-                else if (vertikal.includes(victoryTwo)) alert(playerTwo + " won")
+            for (let i = 0; i < fieldX; i++) {
+                for (let h = 0; h < fieldX; h++) {
+                    // jedes Feld von links oben nach rechts unten testen
+                    diagonal = "";
+                diagonalZwei = "";
+                //nur im array checken
+                if (i + (pointsToWin - 1) < fieldX) {
+                    if (h + (pointsToWin - 1) < fieldX) {
+                        for (let m = 0; m < pointsToWin; m++) {
+                            diagonal += fieldArray[i + m][h + m];
+                        }
+
+                            // gewinner checken
+                        if (diagonal.includes(victoryOne)) {
+                                alert(playerOne + " won");
+                                pointsname1++
+                                
+                                score()
+                                resetArray();
+                                sizeOfField();
+                            } else if (diagonal.includes(victoryTwo)) {
+                                alert(playerTwo + " won")
+                                pointsname2++
+                                score()
+                                resetArray();
+                                sizeOfField();
+                            }
+                        }
+                    }
+                    if (h - (pointsToWin - 1) >= 0) {
+                        if (i + (pointsToWin - 1) < fieldX) {
+                            for (let m = 0; m < pointsToWin; m++) {
+                                diagonalZwei += fieldArray[i + m][h - m];
+                            }
+                            if (diagonalZwei.includes(victoryOne)) {
+                                alert(playerOne + " won");
+                                pointsname1++
+                                score()
+                                resetArray();
+                                sizeOfField();
+                            } else if (diagonalZwei.includes(victoryTwo)) {
+                                alert(playerTwo + " won")
+                                pointsname2++
+                                score()
+                                resetArray();
+                                sizeOfField();
+                            }
+                        }
+                    }
+                }
             }
         }
+
+        // Array komplett löschen
+        function resetArray() {
+            fieldArray.splice(0, fieldArray.length)
+        }
+
+        //Spielstand anzeigen
+        function score() {
+            // Zeichen "I" jedes mal bei gewinner hinzufügen
+            let char = "I"
+            //reset span
+            $('#score').text("")
+            $('#scoreTwo').text("")
+            // update span
+
+            let temp1 = char.repeat(pointsname1) 
+            let temp2 = char.repeat(pointsname2)
+            console.log((pointsname1 % 5) + "|"+(pointsname1 % 5))
+        
+            // ab 5 Punkte Linie durchstrichen
+            if ((pointsname1 ) === 5 ){
+                document.getElementById('score').style.textDecoration = 'line-through';
+            }
+            if ((pointsname2 ) === 5 ){
+                document.getElementById('scoreTwo').style.textDecoration = 'line-through';
+                }
+            $('#score').text(temp1)
+            $('#scoreTwo').text(temp2)
+
+        }
+
+        $("span#score").text(score()) //ersetzt den Text-Inhalt des span
 
         // Zufallszahl generieren
         function getRandomInt(max) {
             return Math.floor(Math.random() * Math.floor(max));
         }
+
+
 
     </script>
 
