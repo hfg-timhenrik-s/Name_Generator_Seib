@@ -3,7 +3,8 @@
 Der Klassiker unter den Beschäftigungen die man auf einer langweiligen Familienfeier mal schnell auf der Servierte spielen kann: TikTakToe. Tic-Tac-Toe oder Drei gewinnt ist ein klassisches, einfaches Zweipersonen-Strategiespiel, dessen Geschichte sich bis ins 12. Jahrhundert v. Chr. zurückverfolgen lässt. Und genau weil es so einfach und simpel ist, sollte man es eigentlich immer bei sich haben. Auch digital um dann, wenn man gerade keine Servierte und Stift zur Hand hat, trotzdem auf dem Laptop diesen Klassiker der Spielekultur spielen zu können. Dies nahm ich als Anlass und programmierte den Klassiker zur Digitalen Variante um. Und falls du den Klassiker erweitern willst, gibt es auch ein paar modifizierungen! 
 
 ![Dogs playing Poker, but thinking about TikTakToe!](https://pnimg.net/w/articles/4/564/fa0ba0726d.png)
-```Dogs playing Poker, but thinking about TikTakToe!```
+
+> ```Dogs playing Poker, but thinking about TikTakToe!```
 
 ## Benutzung
 
