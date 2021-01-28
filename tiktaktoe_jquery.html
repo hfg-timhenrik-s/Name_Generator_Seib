@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Tim Henrik Seib" />
     <link href="tiktakto.css" type="text/css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&family=Righteous&display=swap"
@@ -30,10 +31,13 @@
 
 <body>
     <h1 class="headline">tik,tAk & toe</h1>
-    <p> <input type="number" id="fieldX" value="3"> <button onclick="resetArray() + sizeOfField()">confirm!</button>
+    <p> Size of Gamefield: <input type="number" id="fieldX" value="2"> Winning condition: <input type="number" id="rule"
+            value="3">
     </p>
-    <p> <input style="color: #78CDD7;" id="PlayerOne" value="Name 01"> | <input style="color: #F7CACD;" id="PlayerTwo"
-            value="Name 02"> <button onclick="confirm()"> confirm!</button>
+    <p> <input  style="margin: auto ;color: #78CDD7; width: 130px;" id="PlayerOne" value="Name 01"> 
+        | 
+        <input style="color: #F7CACD; width: 130px;" id="PlayerTwo" value="Name 02">
+        <button style="text-align: right;" onclick="confirm()"> confirm!</button> </p>
     <p><span style="font-size: 20px;" id="score"> </span> | <span style="font-size: 20px;" id="scoreTwo"></span></p>
     <p> It´s your turn ... <span id="playerTurn"></span> </p>
 

@@ -1,24 +1,32 @@
 // Punktestand der Spieler
 let pointsname1 = 0;
 let pointsname2 = 0;
-// UI erstellen
+
+// Variablen für UI festlegen
 let size = ""
 let id = ""
 let fieldArray = []
-//Spielfeldgröße abfragen
-let fieldX = $("#fieldX").val()
 
-//Funktion zum bauen eines Spielfelds
-//Feld Größe entscheiden 
+//Spielfeldgröße aus HTML-Input Field abrufen
+let fieldX = $("#fieldX").val()
+//Spielfeldgröße aus HTML-Input Field bei jedem neuen klick abrufen
+$("#fieldX").on("input", function () {
+    fieldX = $("#fieldX").val();
+    resetArray();
+    sizeOfField();
+})
+
+
+//Funktion zum erstellen eines Spielfelds
 function sizeOfField() {
     $("tr").remove()
     //(Wert wird vom fieldX Input feld genommen)
-    size = $("#fieldX").val()
+    size = fieldX;
     console.log(size)
 
     for (let i = 0; i < size; i++) {
 
-        //create Array für jede Zeile
+        //create Array in Array für jede Zeile
         fieldArray.push([]);
         // für jeder Tabellenzeile Id-Namen erstellen
         id = "Zeile" + i
@@ -36,13 +44,13 @@ function sizeOfField() {
 }
 
 //Deklariation von Variablen (Spieler)
-let playerOne = ""
-let playerTwo = ""
+let playerOne = "Hans"
+let playerTwo = "Peter"
 let aktuellerSpieler
 
 //Zufällig Spieler auswählen, welcher beginnnt
-// Fehler in jshint bleibt bestehen da immer weiter verschachtelte Funktionen aufgerufen werden
-
+//js ignoriert weil onclick in html 
+//jshint ignore:start
 function beginner() {
     if (getRandomInt(2) >= 1) {
         aktuellerSpieler = playerOne
@@ -51,19 +59,20 @@ function beginner() {
     }
     return aktuellerSpieler
 }
+//jshint ignore:end
 
-//It´s your turn Feld mit Inhalt füllen wird von js ignoriert weil onclick in html 
+//It´s your turn Feld mit Inhalt füllen wird wird von js ignoriert weil onclick in html 
 //jshint ignore:start
 function confirm() {
+    //Spielernamen aus HTML-Inputfield nehmen
     playerOne = document.getElementById("PlayerOne").value
     playerTwo = document.getElementById("PlayerTwo").value
-    // Spielernamen ins Span playerTurn einfügen
+    // Spielernamen ins Html-Span playerTurn einfügen
     document.getElementById("playerTurn").innerText = beginner()
 }
 //jshint ignore:end
 
-//abwechselnd Spieler (Player 1 oder Player 2)
-
+//abwechselnd Spieler an die Reihe kommen lassen (Player 1 oder Player 2)
 function change() {
     if (aktuellerSpieler === playerOne) {
         aktuellerSpieler = playerTwo
@@ -73,31 +82,26 @@ function change() {
     document.getElementById("playerTurn").innerText = aktuellerSpieler
 }
 
-//ersetzt den Text-Inhalt des span
-$("span#playerTurn").text(aktuellerSpieler)
-
-//Auf User Klick reagieren
-//anklickbar machen
-//Nur ein Zeichen Pro Feld
-
+//Auf User Klick reagieren sodass Felder anklickbar werden und daraufhin mit Farbe gefüllt werden
+//Es darf nur ein Zeichen Pro Feld
 function clickPlayer(id) {
-    // wenn diese Farbe im CSS ist soll Farbe geändert werden
+    // wenn diese Farbe (leeres Feld) im CSS ist, kann man durch Klick Farbe ändern
     if ($("#" + id).css("background-color") === "rgb(204, 197, 185)") {
         $("#" + id).css("background-color", colourChange());
-        // Angeklickte Zelle im Array mit dem playernamen füllen
+        // Angeklickte Zelle finden und im Array mit dem playernamen füllen
         id = id.replace("Zelle", "")
         let zeile = id[0];
         let reihe = id[1];
         fieldArray[zeile][reihe] = aktuellerSpieler;
         console.log(fieldArray)
-        checkUnentschieden() 
+        // Nach aktuellstem Stand im Array auf Gewinn überprüfen und anschließend Spieler wechseln
         WinCheck()
+        checkUnentschieden()
         change()
     }
 }
 
-//Bei neuem Spieler und nach klick bekommt man eine neue farbe
-
+//Bei neuem Spieler und nach klick bekommt man eine neue farbe (wird in ClickPlayer aufgerufen)
 function colourChange() {
     //PlayerOne hat Farbe Türkis
     if (aktuellerSpieler === playerOne) {
@@ -108,10 +112,14 @@ function colourChange() {
     }
 }
 
-//Gewinnbedingung erstellen (wie viele Zeilen müssen nebeneinander liegen für den sieg)
-let pointsToWin = 3;
+//Gewinnbedingung erstellen (wie viele Zeilen muss ein Spieler nebeneinander besetzt haben für den sieg)
+let pointsToWin = $("#rule").val();
+//aktualisiert bei jedem neuen klick im HTML-Input Field und übergibt neuen Wert 
+$("#rule").on("input", function () {
+    pointsToWin = $("#rule").val();
+})
 
-//felder auf Gewinnbedingung prüfen
+//Gewiiner finder (Felder auf Gewinnbedingung prüfen)
 function WinCheck() {
     // Deklariation von Variablen (Gewinnmöglichkeiten/Spielfeldgröße)
     let horizontal = "";
@@ -119,66 +127,63 @@ function WinCheck() {
     // Gewinnbedingung (Wie oft muss der Spieler Name hinter einanderstehen /Spielername wird aneinadergereiht)
     let victoryOne = playerOne.repeat(pointsToWin)
     let victoryTwo = playerTwo.repeat(pointsToWin)
-    // vertikal und horizontal Linien testen
-    for (let i = 0; i < fieldX; i++) {
+    //  Schleife für Spalten 
+    for (let i = 0; i < size; i++) {
         horizontal = "";
         vertikal = "";
-        //Jedes Feld in der Linie testen
-        for (let t = 0; t < fieldX; t++) {
-            // Inhalt der Felder in string einsetzen
-
+        //Jedes Feld in der Spalte testen
+        for (let t = 0; t < size; t++) {
+            // Inhalt des Arrays in string einsetzen
             horizontal += fieldArray[i][t]
             vertikal += fieldArray[t][i]
         }
         // die erstellten Strings auf die Gewinnbedingung kontrollieren
         if (horizontal.includes(victoryOne)) {
-            alert(playerOne + " won")
             pointsname1++
             score();
             sizeOfField();
         }
         else if (horizontal.includes(victoryTwo)) {
-            alert(playerTwo + " won")
             pointsname2++
             score();
             sizeOfField();
         }
         if (vertikal.includes(victoryOne)) {
-            alert(playerOne + " won");
             pointsname1++
             score();
             sizeOfField();
         }
         else if (vertikal.includes(victoryTwo)) {
-            alert(playerTwo + " won")
             pointsname2++
             score();
             sizeOfField();
         }
     }
+    //Spielfeld auf Diagonale Gewinnmöglichkeiten testen
     WinCheckDiagonal()
 }
 
 function WinCheckDiagonal() {
-    // diagonale Felder checken
+    // Deklariation von Variablen (Gewinnmöglichkeiten)
     let diagonal = "", diagonalZwei = ""; //links oben nach rechts unten//links unten nach recht oben
 
-    // Gewinnbedingung (Wie oft muss der Spieler Name hinter einanderstehen /Spielername wird aneinadergereiht)
-    let victoryOne = playerOne.repeat(pointsToWin), victoryTwo = playerTwo.repeat(pointsToWin);
+    // Gewinnbedingung (Wie oft muss der Spieler Name hinter einanderstehen/Spielername wird aneinadergereiht)
+    let victoryOne = playerOne.repeat(pointsToWin)
+    let victoryTwo = playerTwo.repeat(pointsToWin);
 
-    for (let i = 0; i < fieldX; i++) {
-        for (let h = 0; h < fieldX; h++) {
+    for (let i = 0; i < size; i++) {
+        for (let h = 0; h < size; h++) {
             // jedes Feld von links oben nach rechts unten testen
             diagonal = "";
             diagonalZwei = "";
             //nur im array checken
-            if (i + (pointsToWin - 1) < fieldX) {
-                if (h + (pointsToWin - 1) < fieldX) {
+            if (i + (pointsToWin - 1) < size) {
+                if (h + (pointsToWin - 1) < size) {
                     for (let m = 0; m < pointsToWin; m++) {
+                        // Inhalt des Arrays in string einsetzen
                         diagonal += fieldArray[i + m][h + m];
                     }
-
-                    // gewinner checken
+                    // Auf Gewinnbedingung überprüfen
                     if (diagonal.includes(victoryOne)) {
                         pointsname1++
                         score();
@@ -191,7 +196,7 @@ function WinCheckDiagonal() {
                 }
             }
             if (h - (pointsToWin - 1) >= 0) {
-                if (i + (pointsToWin - 1) < fieldX) {
+                if (i + (pointsToWin - 1) < size) {
                     for (let m = 0; m < pointsToWin; m++) {
                         diagonalZwei += fieldArray[i + m][h - m];
                     }
@@ -210,19 +215,19 @@ function WinCheckDiagonal() {
     }
 }
 
-//Checken ob es keinen Gewinner gibt / Unentschieden
+// Unentschieden / Checken ob es keinen Gewinner gibt
 function checkUnentschieden() {
+    //standartzusand des Spielfelds
     let EmptyFieldLeft = false;
-    
-    //check if our whole field is full, in which case we have a draw
-    for (let i = 0; i < fieldX; i++) {
-        for (let j = 0; j < fieldX; j++) {
+    //überprüfen ob jedes Kästchen im Spielfeld besetzt ist (weil dann unentschieden ist)
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
             if (fieldArray[i][j] === "") {
                 EmptyFieldLeft = true;
             }
         }
     }
-    //this is executed if we have a draw, we add our play Again button.
+    //Wenn EmptyFieldLeft true wird ist es ein unentschieden.
     if (!EmptyFieldLeft) {
         alert("Unentschieden!")
         score();
@@ -231,20 +236,21 @@ function checkUnentschieden() {
 }
 
 
-// Array komplett löschen
+// Function um Array komplett zu löschen
 function resetArray() {
     fieldArray.splice(0, fieldArray.length)
 }
 
-//Spielstand anzeigen
+//Function um Spielstand anzuzeigen
 function score() {
     // Zeichen "I" jedes mal bei gewinner hinzufügen
     let char = "I"
-    //reset span
+
+    //reset span vom letzten Stand 
     $('#score').text("")
     $('#scoreTwo').text("")
-    // update span
 
+    // update span mit aktuellem Stand
     let temp1 = char.repeat(pointsname1)
     let temp2 = char.repeat(pointsname2)
     console.log((pointsname1 % 5) + "|" + (pointsname1 % 5))
@@ -256,14 +262,17 @@ function score() {
     if ((pointsname2) === 5) {
         document.getElementById('scoreTwo').style.textDecoration = 'line-through';
     }
+    //Aktuellen Stand an HTML-Span schicken
     $('#score').text(temp1)
     $('#scoreTwo').text(temp2)
     resetArray();
 }
 
-$("span#score").text(score()) //ersetzt den Text-Inhalt des span
 
-// Zufallszahl generieren
+//js ignoriert weil onclick in html 
+//jshint ignore:start
+// Zufallszahl generieren um zufällig einen Spieler auszuwählen
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
+//jshint ignore:end

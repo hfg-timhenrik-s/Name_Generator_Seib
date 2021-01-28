@@ -4,12 +4,10 @@ h1{
     font-size: 90px;
 }
 
-
 input {
-    align: "center";
-    type: "text";
+    align-items: "center";
     font-family: 'Quicksand', sans-serif; 
-    width: 130px; 
+    width: 30px; 
     height: 30px; 
     text-align: center; 
 }
@@ -26,3 +24,9 @@ td:hover {
 td:active {
     color: yellow;
 }
+
+.center-block {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
