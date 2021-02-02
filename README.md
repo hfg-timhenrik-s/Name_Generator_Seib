@@ -4,6 +4,8 @@ Der Klassiker unter den Beschäftigungen die man auf einer langweiligen Familien
 
 ![Dogs playing Poker, but thinking about TikTakToe!](https://pnimg.net/w/articles/4/564/fa0ba0726d.png)
 
+> ```Dogs playing Poker, but thinking about TikTakToe!```
+
 ## Benutzung
 
 Hier beschreibe ich, wie man mein großartiges Projekt benutzen kann. Was ich tun muss um es zum Laufen zu bekommen (downloaden? welcher Browser? etc.). Wie ich es steuern kann. Was (noch) nicht richtig funktioniert und weshalb.
