@@ -1,3 +1,5 @@
+//alle Requirements erfüllt bis auf eine AI
+
 // Punktestand der Spieler
 let pointsname1 = 0;
 let pointsname2 = 0;
@@ -34,7 +36,7 @@ function sizeOfField() {
         $("table").append("<tr id=" + id + "> </tr>")
         //In jeder Reihe Felder einfügen 
         for (let t = 0; t < size; t++) {
-            //create Array für jedes Feld
+            //create Platzhalter für jedes Feld
             fieldArray[i].push("");
             //td in jede Zellen ID einfügen + jeweilige Zellen ID bennen
             $("#" + id).append("<td id=Zelle" + i + t + "></td>");
@@ -112,14 +114,14 @@ function colourChange() {
     }
 }
 
-//Gewinnbedingung erstellen (wie viele Zeilen muss ein Spieler nebeneinander besetzt haben für den sieg)
+//Gewinnbedingung erstellen (wie viele Felder muss ein Spieler nebeneinander besetzt haben für den sieg)
 let pointsToWin = $("#rule").val();
 //aktualisiert bei jedem neuen klick im HTML-Input Field und übergibt neuen Wert 
 $("#rule").on("input", function () {
     pointsToWin = $("#rule").val();
 })
 
-//Gewiiner finder (Felder auf Gewinnbedingung prüfen)
+//Gewinner finden (fielArray auf Gewinnbedingung prüfen)
 function WinCheck() {
     // Deklariation von Variablen (Gewinnmöglichkeiten/Spielfeldgröße)
     let horizontal = "";
@@ -267,7 +269,6 @@ function score() {
     $('#scoreTwo').text(temp2)
     resetArray();
 }
-
 
 //js ignoriert weil onclick in html 
 //jshint ignore:start

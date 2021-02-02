@@ -1,0 +1,32 @@
+h1{
+    text-align: center;
+    font-family: 'Major Mono Display', monospace; 
+    font-size: 90px;
+}
+
+input {
+    align-items: "center";
+    font-family: 'Quicksand', sans-serif; 
+    width: 30px; 
+    height: 30px; 
+    text-align: center; 
+}
+
+p {
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+}
+
+td:hover {
+    background-color: #CCC5B9;
+}
+
+td:active {
+    color: yellow;
+}
+
+.center-block {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
