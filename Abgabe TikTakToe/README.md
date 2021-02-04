@@ -33,7 +33,7 @@ Ich hoffe ich konnte das hier mehr oder weniger verständlich erklären, fiel mi
   * `fieldArray`: Beinhaltet den aktuellen Spielfeld-Status in Form eines Arrays.
   * `pointsToWin`: Der hier angegeben Wert bestimmt wie viele Felder nebeneinader ausgefüllt sein müssen um zu gewinnen.
 
-# Zentrale Funktionen
+### Zentrale Funktionen
 
 `sizeOfField()`: Eine Funktion die das TikTakToe Spielfeld auf der HTML-Seite, sowie ein Array, welche Das Spielfeld im Code abbildet, kreiert. 
 
@@ -54,7 +54,7 @@ Falls dieser Fall nun eintritt hat die Funktion einen Gewinner erkannt und führ
 
 Die `WinCheckDiagonal()` funktioniert prinzipiell genau gleich wie die `WinCheck()`. Jediglich das Anfangfs durch eine Kombination von Schleifen und anschließend einer Kombination aus If-Cases überprüft wird, ob die Abfrage Sinn macht. Das heißt ob man so überhaupt Gewinnen kann und man nicht Werte abfragt, die außerhalb des Arrays `fieldArray` liegen. Ansonsten macht die Schleife `WinCheckDiagonal()` jedoch das selbe wie die Funktion `WinCheck()`. Sie deklariert zwei leere Strings, bestimmt die Gewinnbedinugng (`victoryOne` & `victoryTwo`) anhand der `PointsToWin` und geht mit Schleifen anschließend Zeile für Zeile, Feld für Feld das `fieldArray` durch und überschreibt den Inhalt in die Strings `diagonal` und `diagonalZwei`. Abschließend überprüft die Funktion ob einer der Strings `diagonal` und `diagonalZwei` mit der Gewinnbedingung (`victoryOne` & `victoryTwo`) übereinstimmt. 
 
-# Zussamenfassung des Systems 
+### Zussamenfassung des Systems 
 
 Der User erstellt sich zuerst ein Spielfeld nach seiner Wunschgröße durch das "Size of Gamefield" input-field, welches mit der Funktion `sizeOfField()` erstellt wird. Dann wählt er sich seine Wunsch "Winnning Condition" aus, welche an `pointsToWin` übertragen wird. Anschließend gibt er die Spielernamen ein und drückt den "confirm" Button. Nun wird durch die Funktion `beginner()` zufällig ein Beginner ausgewählt und unter dem Puntestand angezeigt. Dann kann das Spiel nach den festgelegten Regeln beginnen. 
 
