@@ -18,7 +18,7 @@ Wenn es einen Gewinner gibt, wird das vom Programm erkannt und es wird automatis
 
 Falls dir das Spiel so zu langweilig wird, kannst du jederzeit die Spielfeldgröße oder die Gewinnbedingung ändern. Falls du während einem Spiel Die Spielfeldgröße änderst wird das aktuelle Spiel neu gestartet und es beginnt alles wieder von vorne. die Gewinnnbedingung kannst du jedoch jederzeit ändern und so auch noch während einem laufendem Spiel die Spannung steigern. Der Spielstand bleibt immer bestehen, außer du lädst die Seite neu. 
 
-<img src="../TikTakToe.png" width="500px">
+<img src="../TikTakToe.png" width="1000px">
 
 ## Aufbau
 
